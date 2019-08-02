@@ -40,4 +40,15 @@ class Plexus(pyre.plexus, family="isce3.components.plexus"):
         return super().pyre_interactiveSessionContext(context=context)
 
 
-# end of file
+   # virtual filesystem configuration
+    def pyre_mountApplicationFolders(self, pfs, prefix):
+        """
+        Explore the installation folders and construct my private filesystem
+        """
+        # chain up
+        pfs = super().pyre_mountApplicationFolders(pfs=pfs, prefix=prefix)
+        # all done
+        return pfs
+
+
+ # end of file
