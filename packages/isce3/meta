@@ -17,13 +17,15 @@ version = (major, minor, revision)
 
 
 # decorations for the help system
-copyright = "copyright (c) 2008-2019 california institute of technology; all rights reserved"
+copyright = """
+    copyright (c) 2008-2019 california institute of technology
+    all rights reserved
+"""
 
 
 banner = f"""
     isce {major}.{minor} revision {revision}
-    {copyright}
-"""
+""" + copyright
 
 
 header = banner + """
