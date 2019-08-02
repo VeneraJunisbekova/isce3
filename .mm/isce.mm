@@ -30,11 +30,10 @@ isce.lib.c++.flags += $($(compiler.c++).std.c++17)
 # the isce extension
 isce.ext.pkg := isce.pkg
 isce.ext.wraps := isce.lib
-isce.ext.root := extensions/cython/isce/
+isce.ext.root := extensions/isce3/
 isce.ext.stem := isceextension
 isce.ext.module := isceextension
 isce.ext.extern := isce.lib gdal hdf5 mpi numpy pyre python
-isce.ext.capsule :=
 
 # the cereal lib meta-data
 cereal.lib.root := contrib/cereal/include/cereal/
