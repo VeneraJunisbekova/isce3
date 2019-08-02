@@ -24,7 +24,7 @@ class Plexus(pyre.plexus, family="isce3.components.plexus"):
         Generate the help banner
         """
         # show the license header
-        return isce3.meta.license
+        return isce3.meta.header
 
 
     # interactive session management
