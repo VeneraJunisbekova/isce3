@@ -31,8 +31,7 @@ isce.lib.c++.flags += $($(compiler.c++).std.c++17)
 isce.ext.pkg := isce.pkg
 isce.ext.wraps := isce.lib
 isce.ext.root := extensions/isce3/
-isce.ext.stem := isceextension
-isce.ext.module := isceextension
+isce.ext.stem := isce3
 isce.ext.extern := isce.lib gdal hdf5 mpi numpy pyre python
 
 # the cereal lib meta-data
