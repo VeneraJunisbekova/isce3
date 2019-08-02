@@ -1,9 +1,4 @@
 # -*- Makefile -*-
-#
-# michael a.g. aïvázis
-# orthologue
-# (c) 1998-2019 all rights reserved
-#
 
 # project meta-data
 isce.major := 3
