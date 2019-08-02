@@ -6,7 +6,7 @@ import pyre
 
 
 # pull {action} and rebrand it
-class Action(pyre.action, family="isce3.actions"):
+class Action(pyre.action, family="isce3.cli"):
     """
     Protocol declaration for isce commands
     """
