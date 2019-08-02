@@ -8,12 +8,12 @@ import isce3
 # declaration
 class About(isce3.shells.command, family="isce3.cli.about"):
     """
-    Display information about the app
+    Display human readable information about the app
     """
 
 
     # administrative
-    @isce3.export
+    @isce3.export(tip="the copyright note")
     def copyright(self, plexus, **kwds):
         """
         Print the copyright note of the isce3 package
@@ -26,7 +26,7 @@ class About(isce3.shells.command, family="isce3.cli.about"):
         return
 
 
-    @isce3.export
+    @isce3.export(tip="acknowledgments and sponsor info")
     def credits(self, plexus, **kwds):
         """
         Print the isce3 package acknowledgments
@@ -39,7 +39,7 @@ class About(isce3.shells.command, family="isce3.cli.about"):
         return
 
 
-    @isce3.export
+    @isce3.export(tip="licensing information")
     def license(self, plexus, **kwds):
         """
         Print the isce3 package license
