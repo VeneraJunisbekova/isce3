@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+
+# get my package
+import nisar
+
+
+# boot
+if __name__ == "__main__":
+    # build an instance of the plexus
+    app = nisar.shells.plexus(name="nisar.plexus")
+    # invoke it
+    status = app.run()
+    # and pass the status on to the shell
+    raise SystemExit(status)
+
+
+# end of file
