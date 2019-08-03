@@ -7,19 +7,14 @@
 
 #pragma once
 
-// ellipsoid extension private namespace
-namespace isce {
-  namespace extension {
-    namespace core {
+// place everything in my namespace
+namespace isce::extension::core::ellipsoid {
 
-      // the constructor
-      extern const char * const ellipsoid__name__;
-      extern const char * const ellipsoid__doc__;
-      PyObject * ellipsoid(PyObject *, PyObject *);
+    // the constructor
+    extern const char * const ellipsoid__name__;
+    extern const char * const ellipsoid__doc__;
+    PyObject * ellipsoid(PyObject *, PyObject *);
 
-    }
-  }
-} // ellipsoid extension private namespace
+}
 
 // end-of-file
-
