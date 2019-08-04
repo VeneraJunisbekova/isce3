@@ -22,14 +22,25 @@ from pyre import (
 
 # bootstrap
 package = executive.registerPackage(name='isce3', file=__file__)
-# save the geography
+# publish the package layout
 home, prefix, defaults = package.layout()
 
 
+# publish my extension modules
+from .extensions import (
+    libisce,     # the pure CPU implementation of isce
+)
+
 # publish the local modules
 from . import (
-    meta,        # package meta-data
-    shells,      # application support
+    meta,                # package meta-data
+    shells,              # application support
+    protocols,           # abstract specifications of isce3 entities
+)
+
+# convenience access to factories of objects from the lower level namespaces
+from .core import (
+    newEllipsoid,           # ellipsoid factory
 )
 
 
