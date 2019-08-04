@@ -14,7 +14,7 @@ isce.extensions := isce.ext
 isce.tests :=
 
 # the isce python package
-isce.pkg.name := isce3
+isce.pkg.stem := isce3
 isce.pkg.root := packages/isce3/
 isce.pkg.ext := extensions/
 isce.pkg.drivers := isce3
