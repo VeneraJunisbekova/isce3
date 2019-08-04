@@ -18,8 +18,31 @@ namespace isce::extension {
          // ellipsoid
          // constructor
          {
-          core::ellipsoid::ellipsoid__name__, core::ellipsoid::ellipsoid,
-          METH_VARARGS, core::ellipsoid::ellipsoid__doc__
+          core::ellipsoid::ellipsoid__name__,
+          core::ellipsoid::ellipsoid,
+          METH_VARARGS,
+          core::ellipsoid::ellipsoid__doc__
+         },
+         // access to the semi-major axis
+         {
+          core::ellipsoid::ellipsoid_semiMajor__name__,
+          core::ellipsoid::ellipsoid_semiMajor,
+          METH_VARARGS,
+          core::ellipsoid::ellipsoid_semiMajor__doc__
+         },
+         // access to the semi-minor axis
+         {
+          core::ellipsoid::ellipsoid_semiMinor__name__,
+          core::ellipsoid::ellipsoid_semiMinor,
+          METH_VARARGS,
+          core::ellipsoid::ellipsoid_semiMinor__doc__
+         },
+         // access to the eccentricity squared
+         {
+          core::ellipsoid::ellipsoid_eccentricitySquared__name__,
+          core::ellipsoid::ellipsoid_eccentricitySquared,
+          METH_VARARGS,
+          core::ellipsoid::ellipsoid_eccentricitySquared__doc__
          },
 
          // sentinel
