@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 
-import pyre
-from ..protocols import ProductReader
+# infrastructure
+import nisar
 
-class Base(pyre.component,
-           family='nisar.productreader.base',
-           implements=ProductReader):
+# base hdf5 reader
+class HDF5(nisar.component, family='nisar.readers.hdf5', implements=nisar.protocols.reader):
     '''
-    Base class for NISAR products.
-
+    HDF5 base reader for NISAR products.
     Contains common functionality that gets reused across products.
     '''
+
+    # do any of these need to be nisar properties
     _CFPath = pyre.properties.str(default='/')
-    _CFPath.doc = 'Absolute path to scan for CF convention metadata'
+    _CFPath.doc = 'Absolute path to scan for CF convention metadata' #change this
 
     _RootPath = pyre.properties.str(default='/science/LSAR')
-    _RootPath.doc = 'Absolute path to SAR data from L-SAR/S-SAR'
+    _RootPath.doc = 'Absolute path to SAR data from L-SAR/S-SAR'  # how is L or S chosen?
 
     _IdentificationPath = pyre.properties.str(default='identification')
     _IdentificationPath.doc = 'Absolute path ath to unique product identification information'
@@ -38,34 +38,41 @@ class Base(pyre.component,
     productValidationType = pyre.properties.str(default='BASE')
     productValidationType.doc = 'Validation tag to compare identification information against to ensure that the right product type is being used.'
 
+
     def __init__(self, hdf5file='None', **kwds):
         '''
         Constructor.
         '''
         # Filename
         self.filename = hdf5file
-
         # Identification information
         self.identification = None
-
         # Polarization dictionary
         self.polarizations = {}
-
+        # parse the file
         self._parse(self.filename)
-    
+        # all done
+        return
+
+
     def _parse(self, hdf5file):
         '''
         Parse the HDF5 file and populate ISCE data structures.
         '''
-        import h5py
-
+        # filename
         self.filename = hdf5file
+        #
         self.populateIdentification()
-        #For now, Needs to be an assertion check in the future
+        # check if the productType is the correct one
+        # possible runtime error; report to the user
         self.identification.productType = self.productValidationType
+        #
         self.parsePolarizations()
+        # all done
+        return
 
-    @pyre.export
+
+    @nisar.export
     def getSwathMetadata(self, frequency='A'):
         '''
         Returns metadata corresponding to given frequency.
@@ -79,25 +86,25 @@ class Base(pyre.component,
 
         return swath
 
-    @pyre.export
+    @nisar.export
     def getRadarGrid(self, frequency='A'):
         '''
         Return radarGridParameters object
         '''
         swath = self.getSwathMetadata(frequency=frequency)
-        return swath.getRadarGridParameters() 
+        return swath.getRadarGridParameters()
 
-    @pyre.export
+    @nisar.export
     def getGridMetadata(self, frequency='A'):
         '''
         Returns metadata corresponding to given frequency.
         '''
         raise NotImplementedError
 
-    @pyre.export
+    @nisar.export
     def getOrbit(self):
         '''
-        extracts orbit 
+        extracts orbit
         '''
         import h5py
         import isce3
@@ -111,7 +118,7 @@ class Base(pyre.component,
 
         return orbit
 
-    @pyre.export
+    @nisar.export
     def getDopplerCentroid(self, frequency='A'):
         '''
         Extract the Doppler centroid
@@ -121,9 +128,9 @@ class Base(pyre.component,
         import os
         import numpy as np
 
-        dopplerPath = os.path.join(self.ProcessingInformationPath, 
-                                'parameters', 'frequency' + frequency, 
-                                'dopplerCentroid') 
+        dopplerPath = os.path.join(self.ProcessingInformationPath,
+                                'parameters', 'frequency' + frequency,
+                                'dopplerCentroid')
 
         zeroDopplerTimePath = os.path.join(self.ProcessingInformationPath,
                                             'parameters/zeroDopplerTime')
@@ -136,12 +143,12 @@ class Base(pyre.component,
             zeroDopplerTime = fid[zeroDopplerTimePath][:]
             slantRange = fid[slantRangePath][:]
 
-        dopplerCentroid = isce3.core.dopplerCentroid(x=slantRange, 
-                                                    y=zeroDopplerTime, 
+        dopplerCentroid = isce3.core.dopplerCentroid(x=slantRange,
+                                                    y=zeroDopplerTime,
                                                     z=doppler)
         return dopplerCentroid
 
-    @pyre.export
+    @nisar.export
     def getZeroDopplerTime(self):
         '''
         Extract the azimuth time of the zero Doppler grid
@@ -149,14 +156,14 @@ class Base(pyre.component,
 
         import h5py
         import os
-        zeroDopplerTimePath = os.path.join(self.SwathPath, 
+        zeroDopplerTimePath = os.path.join(self.SwathPath,
                                           'zeroDopplerTime')
         with h5py.File(self.filename, 'r') as fid:
             zeroDopplerTime = fid[zeroDopplerTimePath][:]
 
         return zeroDopplerTime
 
-    @pyre.export
+    @nisar.export
     def getSlantRange(self, frequency='A'):
         '''
         Extract the slant range of the zero Doppler grid
@@ -223,7 +230,7 @@ class Base(pyre.component,
     def MetadataPath(self):
         import os
         return os.path.join(self.ProductPath, self._MetadataPath)
-    
+
     @property
     def ProcessingInformationPath(self):
         import os

@@ -1,3 +1,10 @@
+# -*- Python -*-
+# -*- coding: utf-8 -*-
+#
+# eric m. gurrola <eric.gurrola@jpl.nasa.gov>
+# california institute of technology, jet propulsion laboratory
+# (c) 2010
+#
 #-*- coding: utf-8 -*-
 
 

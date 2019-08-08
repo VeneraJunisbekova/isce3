@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 
+import os
 from nisar.products.readers import SLC
 
 def main():
-    slc = SLC(hdf5file='llh_uavsar_rosamond.h5')
-    slc._parse('llh_uavsar_rosamond.h5')
+    curpath = os.path.dirname(os.path.realpath(__file__))
+    print('dir_path = {}'.format(curpath))
+    h5file = os.path.join(curpath, '../../../../', 'isce3_test_data/llh_uavsar_rosamond.h5')
+    slc = SLC(hdf5file=h5file)
+    slc._parse(h5file)
     print("slc.filename             = {}".format(slc.filename))
     print("slc.getZeroDopplerTime() = {}".format(slc.getZeroDopplerTime()))
     print("slc.getSlantRange() = {}".format(slc.getSlantRange()))
