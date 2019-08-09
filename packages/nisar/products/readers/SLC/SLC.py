@@ -25,3 +25,8 @@ class SLC(Base, family='nisar.productreader.slc'):
         '''
         super()._parse(hdf5file)
 
+    def getSlcDataset(self, frequency, polarization):
+        '''
+        Return a SLC dataset for a given frequency and polarization
+        '''
+        super().getSlcDataset(frequency, polarization)
