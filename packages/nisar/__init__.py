@@ -2,18 +2,20 @@
 
 # import and publish pyre symbols
 from isce3 import (
-    # protocols, components, traits, and their infrastructure
+    # infrastructure for protocols, components, traits, and their infrastructure
     schemata, constraints, properties, protocol, component, foundry,
     # component interface decorators
     export, provides,
-    # the manager of the pyre runtime
+    # the runtime manager
     executive,
     # multidimensional containers
     grid,
     # concurrency
     nexus,
-    # workflows
+    # access to the low level workflow building blocks
     flow,
+    # abstractions
+    protocols,
     # miscellaneous
     tracking, units, weaver,
     )
@@ -29,6 +31,7 @@ home, prefix, defaults = package.layout()
 from . import (
     meta,        # package meta-data
     shells,      # application support
+    workflows,   # built-in processing workflows
 )
 
 
