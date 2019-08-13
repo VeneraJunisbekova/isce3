@@ -29,9 +29,9 @@ class Ellipsoid(isce3.component,
         The ellipsoid semi-minor axis
         """
         # get the value, expected in meters
-        self._b = isce3.libisce.ellipsoid_semiMinor(self.ellipsoid)
+        b = isce3.libisce.ellipsoid_semiMinor(self.ellipsoid)
         # add the units and return it
-        return self._b * isce3.units.length.meter
+        return b * isce3.units.length.meter
 
 
     # meta-methods
