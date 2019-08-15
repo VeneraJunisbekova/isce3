@@ -3,8 +3,16 @@
 
 ; the WGS84 reference ellipsoid
 isce3.ellipsoid # wgs84:
-    a = 6378.137 * km
-    e2 = .0066943799901
+    semi_major_axis      = 6378.137 * km
+    eccentricity_squared = .0066943799901
 
+; a 'spherical' reference ellipsoid
+isce3.ellipsoid # spherical:
+    semi_major_axis      = 6378.137 * km
+    eccentricity_squared = 0.
+
+isce3.ellipsoid # test:
+    semi_major_axis      = 6387.137 * km
+    eccentricity_squared = 0.00000001
 
 ; end of file

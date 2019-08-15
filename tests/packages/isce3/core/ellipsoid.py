@@ -46,9 +46,9 @@ data = [
 def test_CythonInterface():
     import numpy.testing as npt
 
-    elp = isce3.core.ellipsoid(a=6387137., e2=0.00000001)
+    elp = isce3.core.newEllipsoid(name='test')
 
-    assert elp.a == 6387137.
+    assert elp.a.value == 6387137.
     assert elp.e2 == 0.00000001
 
     return
@@ -123,4 +123,3 @@ if __name__ == '__main__':
     test_xyztoLonLatArray()
     test_xyzToLonLatPoints()
     test_lonLatToXyzPoints()
-
