@@ -57,23 +57,8 @@ class Base(pyre.component,
         # Polarization dictionary
         self.polarizations = {}
 
-        # List of h5 file objects opened with self.filename
-        #self.openH5Files = []
-
         self._parse()
     
-    '''
-    def __del__(self):
-        # Close any open h5py file objects
-        if self.openH5Files:
-            for i, h5File in enumerate(self.openH5Files):
-                # Check for open file obj. Can not close a closed file obj.
-                try:
-                    h5File.close()
-                except:
-                    print(i)
-    '''
-
     def _parse(self):
         '''
         Parse the HDF5 file and populate ISCE data structures.
@@ -193,9 +178,6 @@ class Base(pyre.component,
 
         # open H5 with swmr mode enabled
         fid = h5py.File(self.filename, 'r', libver='latest', swmr=True)
-
-        # add H5 file object to list of open H5 file objects
-        #self.openH5Files.append(fid)
 
         # build path the desired dataset
         folder = self.SwathPath
