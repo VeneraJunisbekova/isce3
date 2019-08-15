@@ -40,7 +40,7 @@ def test_slc_swmr():
 
     # use A+VV SLC to test other freq+pol SLC with swmr mode 
     ds0 = slc_obj.getSlcDataset('A', 'VV')
-    assert(ds0.shape == (n_row, n_col)
+    assert(ds0.shape == (n_row, n_col))
 
     # open each freq+pol dataset, sum, and check values
     # define SLC key parameters
