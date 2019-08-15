@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+#
+# Authors: Heresh Fattahi, Liang Yu
+# Copyright 2019-
+#
 
 import h5py
 import os
@@ -54,22 +58,28 @@ class Base(pyre.component,
         self.polarizations = {}
 
         # List of h5 file objects opened with self.filename
-        self.openH5Files = []
+        #self.openH5Files = []
 
-        self._parse(self.filename)
+        self._parse()
     
+    '''
     def __del__(self):
         # Close any open h5py file objects
         if self.openH5Files:
-            for h5File in self.openH5Files:
-                h5File.close()
+            for i, h5File in enumerate(self.openH5Files):
+                # Check for open file obj. Can not close a closed file obj.
+                try:
+                    h5File.close()
+                except:
+                    print(i)
+    '''
 
-    def _parse(self, hdf5file):
+    def _parse(self):
         '''
         Parse the HDF5 file and populate ISCE data structures.
         '''
 
-        self.filename = hdf5file
+        #self.filename = hdf5file
         self.populateIdentification()
         #For now, Needs to be an assertion check in the future
         self.identification.productType = self.productValidationType
@@ -185,7 +195,7 @@ class Base(pyre.component,
         fid = h5py.File(self.filename, 'r', libver='latest', swmr=True)
 
         # add H5 file object to list of open H5 file objects
-        self.openH5Files.append(fid)
+        #self.openH5Files.append(fid)
 
         # build path the desired dataset
         folder = self.SwathPath
