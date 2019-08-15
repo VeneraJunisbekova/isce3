@@ -16,11 +16,12 @@ class Ellipsoid(isce3.component,
     semi_major_axis = isce3.properties.dimensional()
     semi_major_axis.default = 6378.1370 * isce3.units.length.km
     semi_major_axis.doc = "the ellipsoid semi-major axis"
+    semi_major_axis.const = NotImplemented
 
     eccentricity_squared = isce3.properties.float()
-    eccentricity_squared.default = .0066943799901
+    eccentricity_squared.default = 0.0066943799901
     eccentricity_squared.doc = "the ellipsoid eccentricity squared"
-
+    eccentricity_squared.const = NotImplemented
 
     # public data
     @property
