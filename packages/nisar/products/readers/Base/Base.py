@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+#
+# Authors: Heresh Fattahi, Liang Yu
+# Copyright 2019-
+#
 
 import h5py
 import os
@@ -53,23 +57,14 @@ class Base(pyre.component,
         # Polarization dictionary
         self.polarizations = {}
 
-        # List of h5 file objects opened with self.filename
-        self.openH5Files = []
-
-        self._parse(self.filename)
+        self._parse()
     
-    def __del__(self):
-        # Close any open h5py file objects
-        if self.openH5Files:
-            for h5File in self.openH5Files:
-                h5File.close()
-
-    def _parse(self, hdf5file):
+    def _parse(self):
         '''
         Parse the HDF5 file and populate ISCE data structures.
         '''
 
-        self.filename = hdf5file
+        #self.filename = hdf5file
         self.populateIdentification()
         #For now, Needs to be an assertion check in the future
         self.identification.productType = self.productValidationType
@@ -178,12 +173,20 @@ class Base(pyre.component,
         Return SLC dataset of given frequency and polarization from hdf5 file 
         '''
 
+        # TODO add checks for (1) file open error (2) path check
         slcDataset = None
+
+        # open H5 with swmr mode enabled
         fid = h5py.File(self.filename, 'r', libver='latest', swmr=True)
-        self.openH5Files.append(fid)
+
+        # build path the desired dataset
         folder = self.SwathPath
-        root = os.path.join(folder, 'frequency{0}'.format(frequency), polarization)
-        slcDataset = fid[root]
+        ds_path = os.path.join(folder, 'frequency{0}'.format(frequency), polarization)
+
+        # get dataset
+        slcDataset = fid[ds_path]
+
+        # return dataset
         return slcDataset
 
 
