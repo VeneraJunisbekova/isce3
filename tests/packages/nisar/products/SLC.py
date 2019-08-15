@@ -35,7 +35,7 @@ def test_slc_swmr():
     check if sums are correct
     '''
     # open SLC from hdf5
-    f = '../data/swmr_test.h5'
+    f = 'swmr_test.h5'
     slc_obj = nisar.products.readers.SLC(hdf5file=f)
 
     # use A+VV SLC to test other freq+pol SLC with swmr mode 
