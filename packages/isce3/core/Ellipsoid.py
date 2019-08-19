@@ -32,7 +32,7 @@ class Ellipsoid(isce3.component,
     @property
     def a(self):
         """
-        The ellipsoid semi-minor axis
+        The ellipsoid semi-major axis
         """
         #a = isce3.libisce.ellipsoid_semiMajor(self.ellipsoid)
         a = self.ellipsoid.a
@@ -50,7 +50,7 @@ class Ellipsoid(isce3.component,
         The ellipsoid semi-minor axis
        """
         # get the value, expected in meters
-#        b = isce3.libisce.ellipsoid_semiMinor(self.ellipsoid)
+        # b = isce3.libisce.ellipsoid_semiMinor(self.ellipsoid)
         b = self.ellipsoid.b
         # add the units and return it
         return b * isce3.units.length.meter
@@ -78,11 +78,12 @@ class Ellipsoid(isce3.component,
     def __init__(self, **kwds):
         # chain up
         super().__init__(**kwds)
-        # allocate an {isce::core::Ellipsoid}
         print("self.capi_or_cython = {}".format(self.capi_or_cython))
         if self.capi_or_cython == 'capi':
+            # allocate an {isce::core::Ellipsoid}
             self.ellipsoid = isce3.libisce.ellipsoid(self.semi_major_axis.value, self.eccentricity_squared)
         else:
+            # allocate an {cython} isceextension ellipsoid
             self.ellipsoid = isceextension.pyEllipsoid(self.semi_major_axis.value, self.eccentricity_squared)
         # end-if
         # all done
