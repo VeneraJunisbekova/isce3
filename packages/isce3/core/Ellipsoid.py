@@ -2,7 +2,8 @@
 
 # the package
 import isce3
-
+# the isceextension library
+import isce3.extensions.isceextension as isceextension
 
 # declaration
 class Ellipsoid(isce3.component,
@@ -23,13 +24,18 @@ class Ellipsoid(isce3.component,
     eccentricity_squared.doc = "the ellipsoid eccentricity squared"
     eccentricity_squared.const = NotImplemented
 
+    capi_or_cython = isce3.properties.str()
+    capi_or_cython.default = "cython"
+    capi_or_cython.doc = "choose between using the 'capi' extension or the 'cython' extension"
+
     # public data
     @property
     def a(self):
         """
         The ellipsoid semi-minor axis
         """
-        a = isce3.libisce.ellipsoid_semiMajor(self.ellipsoid)
+        #a = isce3.libisce.ellipsoid_semiMajor(self.ellipsoid)
+        a = self.ellipsoid.a
         # return the value
         return a * isce3.units.length.meter
 
@@ -42,9 +48,10 @@ class Ellipsoid(isce3.component,
     def b(self):
         """
         The ellipsoid semi-minor axis
-        """
+       """
         # get the value, expected in meters
-        b = isce3.libisce.ellipsoid_semiMinor(self.ellipsoid)
+#        b = isce3.libisce.ellipsoid_semiMinor(self.ellipsoid)
+        b = self.ellipsoid.b
         # add the units and return it
         return b * isce3.units.length.meter
 
@@ -56,11 +63,11 @@ class Ellipsoid(isce3.component,
     @property
     def e2(self):
         """
-        The ellipsoid semi-minor axis
+        The ellipsoid eccentricity-squared
         """
-        e2 = isce3.libisce.ellipsoid_eccentricitySquared(self.ellipsoid)
+        # e2 = self.ellipsoid_eccentricitySquared(self.ellipsoid)
         # add the units and return it
-        return self.eccentricity_squared
+        return self.ellipsoid.e2
 
     @e2.setter
     def e2(self, x):
@@ -72,7 +79,12 @@ class Ellipsoid(isce3.component,
         # chain up
         super().__init__(**kwds)
         # allocate an {isce::core::Ellipsoid}
-        self.ellipsoid = isce3.libisce.ellipsoid(self.semi_major_axis.value, self.eccentricity_squared)
+        print("self.capi_or_cython = {}".format(self.capi_or_cython))
+        if self.capi_or_cython == 'capi':
+            self.ellipsoid = isce3.libisce.ellipsoid(self.semi_major_axis.value, self.eccentricity_squared)
+        else:
+            self.ellipsoid = isceextension.pyEllipsoid(self.semi_major_axis.value, self.eccentricity_squared)
+        # end-if
         # all done
         return
 

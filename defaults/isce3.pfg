@@ -5,14 +5,19 @@
 isce3.ellipsoid # wgs84:
     semi_major_axis      = 6378.137 * km
     eccentricity_squared = .0066943799901
+    capi_or_cython = cython
 
 ; a 'spherical' reference ellipsoid
 isce3.ellipsoid # spherical:
     semi_major_axis      = 6378.137 * km
     eccentricity_squared = 0.
+    capi_or_cython = cython
+
 
 isce3.ellipsoid # test:
     semi_major_axis      = 6387.137 * km
     eccentricity_squared = 0.00000001
+    capi_or_cython = cython
+
 
 ; end of file
