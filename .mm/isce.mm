@@ -9,7 +9,7 @@ isce.packages := isce.pkg
 # libraries
 isce.libraries := isce.lib cereal.lib
 # python extensions
-isce.extensions := isce.ext
+isce.extensions := isce.capi isce.cython
 # and test suites
 isce.tests :=
 
@@ -27,12 +27,20 @@ isce.lib.extern := gdal hdf5 mpi fftw pyre
 isce.lib.prerequisites := cereal.lib
 isce.lib.c++.flags += $($(compiler.c++).std.c++17)
 
-# the isce extension
-isce.ext.pkg := isce.pkg
-isce.ext.wraps := isce.lib
-isce.ext.root := extensions/isce3/
-isce.ext.stem := isce3
-isce.ext.extern := isce.lib gdal hdf5 mpi numpy pyre python
+# the isce extension that's built with the C API
+isce.capi.pkg := isce.pkg
+isce.capi.wraps := isce.lib
+isce.capi.root := extensions/isce3/
+isce.capi.stem := isce3
+isce.capi.extern := isce.lib gdal hdf5 mpi numpy pyre python
+
+# the isce extension that's built with cython
+isce.cython.pkg := isce.pkg
+isce.cython.wraps := isce.lib
+isce.cython.root := extensions/cython/isce/
+isce.cython.stem := isceextension
+isce.cython.capsule :=
+isce.cython.extern := isce.lib gdal hdf5 mpi numpy pyre python
 
 # the cereal lib meta-data
 cereal.lib.root := contrib/cereal/include/cereal/
