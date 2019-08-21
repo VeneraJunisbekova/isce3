@@ -32,10 +32,15 @@ class Rdr2Geo(nisar.flow.workflow, family="nisar.workflows.rdr2geo"):
 
         # unpack
         rdr2geo = self.rdr2geo
-        ellipsoid = self.ellipsoid
         demReader = self.demReader
         slcReader = self.slcReader
         slcWriter = self.slcWriter
+
+        print(f"{self}:")
+        print(f"    rdr2geo: {self.rdr2geo}")
+        print(f"    demReader: {self.demReader}")
+        print(f"    slcReader: {self.slcReader}")
+        print(f"    slcWriter: {self.slcWriter}")
 
         # all done
         return
