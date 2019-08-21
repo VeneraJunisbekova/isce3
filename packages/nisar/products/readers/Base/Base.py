@@ -58,14 +58,6 @@ class Base(pyre.component,
         # Polarization dictionary
         self.polarizations = {}
 
-        self._parse()
-    
-    def _parse(self):
-        '''
-        Parse the HDF5 file and populate ISCE data structures.
-        '''
-
-        #self.filename = hdf5file
         self.populateIdentification()
         #For now, Needs to be an assertion check in the future
         self.identification.productType = self.productValidationType
