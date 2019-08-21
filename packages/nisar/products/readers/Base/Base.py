@@ -6,6 +6,7 @@
 
 import h5py
 import os
+import isce3
 import pyre
 from ..protocols import ProductReader
 
@@ -75,7 +76,6 @@ class Base(pyre.component,
         '''
         Returns metadata corresponding to given frequency.
         '''
-        import isce3
         with h5py.File(self.filename, 'r', libver='latest', swmr=True) as fid:
               swathGrp = fid[self.SwathPath]
               swath = isce3.product.swath().loadFromH5(swathGrp, frequency)
@@ -102,8 +102,6 @@ class Base(pyre.component,
         '''
         extracts orbit 
         '''
-        import isce3
-
         orbitPath = os.path.join(self.MetadataPath, 'orbit')
 
         with h5py.File(self.filename, 'r', libver='latest', swmr=True) as fid:
@@ -117,7 +115,6 @@ class Base(pyre.component,
         '''
         Extract the Doppler centroid
         '''
-        import isce3
         import numpy as np
 
         dopplerPath = os.path.join(self.ProcessingInformationPath, 

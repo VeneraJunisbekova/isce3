@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
+#
+# Author: Liang Yu
+# Copyright 2019-
 
+import os
 import gdal
-import isce3
 from nisar.products.readers import SLC
 from isce3.image.ResampSlc import ResampSlc
+from isce3.io.Raster import Raster
 
 def cmdLineParse():
     """
@@ -33,8 +37,11 @@ def cmdLineParse():
 
 
 def main(opts):
+    """
+    resample product SLC against a reference SLC
+    """
 
-    # prep SLC input
+    # prep SLC dataset input
     productSlc = SLC(hdf5file=opts.product)
     referenceSlc = SLC(hdf5file=opts.reference)
 
@@ -43,23 +50,24 @@ def main(opts):
     referenceGrid = referenceSlc.getRadarGrid(opts.frequency)
 
     # instantiate resamp object
-    resamp = resampSlc(productGrid,
-            productGrid.getDopplerCentroid(),
+    resamp = ResampSlc(productGrid,
+            productSlc.getDopplerCentroid(),
             productGrid.wavelength,
             referenceRadarGrid=referenceGrid,
             referenceWavelength=referenceGrid.wavelength)
     
     # Prepare input rasters
-    inSlcRaster = productSlc.getSlcDataset(opts.frequency, opts.polarization)
-    azOffsetRaster = isce3.io.raster(filename=os.path.join(opts.offsetdir, 'range.off'))
-    rgOffsetRaster = isce3.io.raster(filename=os.path.join(opts.offsetdir, 'azimuth.off'))
+    inSlcDataset = productSlc.getGdalSlcDataset(opts.frequency, opts.polarization)
+    inSlcRaster = Raster('', dataset=inSlcDataset)
+    azOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'range.off'))
+    rgOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'azimuth.off'))
 
     # Prepare output raster
     driver = gdal.GetDriverByName('ISCE')
     slcName = 'coreg_{}.slc'.format(opts.polarization)
     outds = driver.Create(os.path.join(outdir, slcName), rgOffsetRaster.width,
                           rgoffRaster.length, 1, gdal.GDT_CFloat32)
-    outSlcRaster = isce3.io.raster('', dataset=outds)
+    outSlcRaster = Raster('', dataset=outds)
 
     # Init output directory
     if not os.path.isdir(opts.outdir):
