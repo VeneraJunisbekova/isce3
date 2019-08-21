@@ -18,25 +18,9 @@ class Rdr2Geo(nisar.shells.command, family="nisar.cli.rdr2geo"):
     flow.doc = "the workflow to execute"
 
 
-    # load a persisted flow
-    @nisar.export(tip="persist the current flow")
-    def load(self, plexus, **kwds):
-        """
-        Load a flow from a configuration file
-        """
-        # grab a channel
-        channel = plexus.info
-        # show me
-        channel.log(f"loading '{self.flow.pyre_name}'")
-        # show me
-        self.flow.pyre_dump(channel=channel, level=1)
-        # all done
-        return 0
-
-
-    # persist a flow
-    @nisar.export(tip="persist the current flow")
-    def save(self, plexus, **kwds):
+    # create a new rdr2geo flow
+    @nisar.export(tip="create a new instance of an rdr2geo flow")
+    def new(self, plexus, **kwds):
         """
         Persist the current flow in a configuration file
         """
@@ -50,11 +34,11 @@ class Rdr2Geo(nisar.shells.command, family="nisar.cli.rdr2geo"):
         return 0
 
 
-    # configuration information
-    @nisar.export(tip="validate and display the workflow configuration")
-    def config(self, plexus, **kwds):
+    # load a persisted flow and display its layout
+    @nisar.export(tip="display information about an existing rdr2geo flow instance")
+    def info(self, plexus, **kwds):
         """
-        Validate and display configuration information
+        Load a flow from a configuration file and display its layout
         """
         # grab a channel
         channel = plexus.info
