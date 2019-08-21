@@ -4,7 +4,7 @@
 # attempt to
 try:
     # pull the pure CPU implementation and publish it;
-    from . import isce3 as libisce
+    from . import isceextension as libisce
 # if this fails
 except ImportError:
     # there isn't very much we can do; isce3 is not installed correctly
