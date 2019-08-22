@@ -25,4 +25,20 @@ class SLC(Base, family='nisar.productreader.slc'):
         ###Read base product information like Identification
         super().__init__(**kwds) 
 
+    def getGdalSlcDataset(self, frequency, polarization):
+        '''
+        Return SLC as GDAL dataset
+        '''
+        # TODO add error check for path and file
+        # construct path to datast
+        ds_path = os.path.join(self.SwathPath, 'frequency{0}'.format(frequency), polarization)
+
+        # construct string to feed to GDAL
+        gdal_path = 'HDF5:"{}":/{}'.format(self.filename, ds_path)
+
+        # get GDAL dataset
+        ds = gdal.Open(gdal_path, gdal.GA_ReadOnly)
+
+        return ds
+
 # end of file

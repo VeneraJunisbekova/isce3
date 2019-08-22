@@ -62,16 +62,16 @@ def main(opts):
     azOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'range.off'))
     rgOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'azimuth.off'))
 
-    # Prepare output raster
-    driver = gdal.GetDriverByName('ISCE')
-    slcName = 'coreg_{}.slc'.format(opts.polarization)
-    outds = driver.Create(os.path.join(outdir, slcName), rgOffsetRaster.width,
-                          rgoffRaster.length, 1, gdal.GDT_CFloat32)
-    outSlcRaster = Raster('', dataset=outds)
-
     # Init output directory
     if not os.path.isdir(opts.outdir):
         os.mkdir(opts.outdir)
+
+    # Prepare output raster
+    driver = gdal.GetDriverByName('ISCE')
+    slcName = 'coreg_{}.slc'.format(opts.polarization)
+    outds = driver.Create(os.path.join(opts.outdir, slcName), rgOffsetRaster.width,
+                          rgOffsetRaster.length, 1, gdal.GDT_CFloat32)
+    outSlcRaster = Raster('', dataset=outds)
 
     # Run resamp
     resamp.resamp(inSlc=inSlcRaster,
