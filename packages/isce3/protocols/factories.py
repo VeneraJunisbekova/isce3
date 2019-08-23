@@ -15,13 +15,13 @@ class producer(isce3.flow.producer, family="isce3.factories"):
 # the factories of various types of SLC
 class rdr2geo(producer, family="isce3.factories.rdr2geo"):
     """
-    Convert an SLC from radar to geographic coordinates
+    Compute a transformation from radar to geodetic coordinates for a given SLC
     """
 
 
 class geo2rdr(producer, family="isce3.factories.geo2rdr"):
     """
-    Convert an SLC from geographic to radar coordinates
+    Compute a transformation from geodetic to radar coordinates for a given SLC
     """
 
 
