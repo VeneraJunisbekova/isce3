@@ -7,7 +7,7 @@ import isce3
 # the flow
 class Rdr2Geo(isce3.flow.workflow, family="isce3.workflows.rdr2geo"):
     """
-    Convert an SLC from radar to geodetic coordinates
+    Compute the transformation from radar coordinates to geodetic coordinates for a given SLC
     """
 
     # flow assets
