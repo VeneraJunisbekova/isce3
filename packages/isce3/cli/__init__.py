@@ -30,7 +30,7 @@ def config():
 
 # easy access to specific workflows
 @isce3.foundry(implements=isce3.shells.action,
-               tip="transform from geodetic to radar coordinates for a given SLC")
+               tip="compute a transformation from geodetic to radar coordinates for a given SLC")
 def geo2rdr():
     # load the command
     from .Geo2Rdr import Geo2Rdr
@@ -41,7 +41,7 @@ def geo2rdr():
 
 
 @isce3.foundry(implements=isce3.shells.action,
-               tip="transform from radar to geodetic coordinates for a given SLC")
+               tip="compute a transformation from radar to geodetic coordinates for a given SLC")
 def rdr2geo():
     # load the command
     from .Rdr2Geo import Rdr2Geo
