@@ -1,58 +1,20 @@
 #-*- coding: utf-8 -*-
 
 # support
+import isce3
 import nisar
 
 
-# the flow
-class Rdr2Geo(nisar.flow.workflow, family="nisar.workflows.rdr2geo"):
+# the {rdr2geo} workflow with {nisar} specific defaults
+class Rdr2Geo(isce3.workflows.rdr2geo(), family="nisar.workflows.rdr2geo"):
     """
-    Convert an SLC from radar to geographic coordinates
+    Compute the transformation from radar coordinates to geodetic coordinates for a given SLC
     """
 
-    # flow assets
-    # the main engine
-    rdr2geo = nisar.protocols.factories.rdr2geo()
-    rdr2geo.doc = "the SLC converter from radar to geographic coordinates"
 
-    # the necessary factories
+    # override the SLC reader to install the {nisar} specific defaults
     slcReader = nisar.protocols.readers.slc()
-    slcReader.doc = "the reader of native SLCs"
-
-    demReader = nisar.protocols.readers.dem()
-    demReader.doc = "the digital elevation model reader"
-
-    slcWriter = nisar.protocols.writers.slc()
-    slcWriter.doc = "the writer of geocoded SLCs"
-
-    # meta-methods
-    def __init__(self, **kwds):
-        # chain up
-        super().__init__(**kwds)
-
-        # unpack
-        rdr2geo = self.rdr2geo
-        demReader = self.demReader
-        slcReader = self.slcReader
-        slcWriter = self.slcWriter
-
-        print(f"{self}:")
-        print(f"    rdr2geo: {self.rdr2geo}")
-        print(f"    demReader: {self.demReader}")
-        print(f"    slcReader: {self.slcReader}")
-        print(f"    slcWriter: {self.slcWriter}")
-
-        # all done
-        return
-        # bind the parts together to make the flow
-        # connect the geo2rdr inputs
-        rdr2geo.radarSLC = slcReader.slc
-        rdr2geo.dem = demReader.dem
-        # and its outputs
-        slcWriter.slc = rdr2geo.geocodedSLC
-
-        # all done
-        return
+    slcReader.doc = "the reader of NISAR compliant SLC products"
 
 
 # end of file
