@@ -2,13 +2,14 @@
 
 
 # support
-import nisar
+import isce3
 
 
-# declaration
-class Geo2Rdr(nisar.shells.command, family="nisar.cli.geo2rdr"):
+# extend the {isce3} command by the same name
+class Geo2Rdr(isce3.cli.geo2rdr(), family="nisar.cli.geo2rdr"):
     """
-    Convert an SLC from geographic to radar coordinates
+    Invoke the {geo2rdr} workflow to compute the transformation from geodetic coordinates to
+    radar coordinates for a given NISAR compliant SLC product
     """
 
 
