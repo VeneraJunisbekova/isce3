@@ -1,9 +1,13 @@
 #-*- coding: utf-8 -*-
 
 
-# factories for the local objects
-from .Action import Action as action
-from .Command import Command as command
+# support
+import isce3
+
+# reuse {action} and {command} from isce3
+action = isce3.shells.action
+command = isce3.shells.command
+# publish the local {plexus}
 from .Plexus import Plexus as plexus
 
 
