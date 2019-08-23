@@ -19,8 +19,6 @@ def cmdLineParse():
     # Required arguments
     parser.add_argument('product', type=str,
             help='Input HDF5 to be resampled.')
-    parser.add_argument('reference', type=str,
-            help='Reference HDF5 product.')
     parser.add_argument('frequency', type=str,
             help='Frequency of SLC.')
     parser.add_argument('polarization', type=str,
@@ -38,23 +36,19 @@ def cmdLineParse():
 
 def main(opts):
     """
-    resample product SLC against a reference SLC
+    resample SLC
     """
 
     # prep SLC dataset input
     productSlc = SLC(hdf5file=opts.product)
-    referenceSlc = SLC(hdf5file=opts.reference)
 
     # get grids needed for resamp object instantiation
     productGrid = productSlc.getRadarGrid(opts.frequency)
-    referenceGrid = referenceSlc.getRadarGrid(opts.frequency)
 
     # instantiate resamp object
     resamp = ResampSlc(productGrid,
             productSlc.getDopplerCentroid(),
-            productGrid.wavelength,
-            referenceRadarGrid=referenceGrid,
-            referenceWavelength=referenceGrid.wavelength)
+            productGrid.wavelength)
     
     # Prepare input rasters
     inSlcDataset = productSlc.getGdalSlcDataset(opts.frequency, opts.polarization)

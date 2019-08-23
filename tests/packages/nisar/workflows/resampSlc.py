@@ -12,22 +12,20 @@ class resamp_opts:
     values can be adjusted to meet test requirements
     '''
     product = 'resamp_prod.h5'
-    reference = 'resamp_ref.h5'
     frequency = 'A'
     polarization = 'HH'
     offsetdir = 'offsets'
     outdir = 'resamp'
 
-def test_resamp_no_reference():
+def test_resamp():
     '''
-    run resample SLC without reference SLC
+    run resample SLC
     current success = no crash
     '''
     opts = resamp_opts()
-    opts.reference = ''
     resampSlc.main(opts)
 
 if __name__ == '__main__':
-    test_resamp_no_reference()
+    test_resamp()
 
 # end of file
