@@ -1,21 +1,17 @@
 #-*- coding: utf-8 -*-
 
 
-# access the pyre framework
-import pyre
+# support
+import isce3
 # and my package
 import nisar
 
 
-# build my CLI action dispatcher
-class Plexus(pyre.plexus, family="nisar.components.plexus"):
+# build my CLI action dispatcher by extending the one from {isce3}
+class Plexus(isce3.shells.plexus, family="nisar.components.plexus"):
     """
     The main CLI action dispatcher
     """
-
-
-    # install my action protocol
-    from .Action import Action as pyre_action
 
 
     # pyre framework hooks
@@ -35,20 +31,9 @@ class Plexus(pyre.plexus, family="nisar.components.plexus"):
         # prime the execution context
         context = context or {}
         # grant access to my package
-        context['nisar'] = nisar  # my package
+        context['nisar'] = nisar
         # and chain up
         return super().pyre_interactiveSessionContext(context=context)
-
-
-   # virtual filesystem configuration
-    def pyre_mountApplicationFolders(self, pfs, prefix):
-        """
-        Explore the installation folders and construct my private filesystem
-        """
-        # chain up
-        pfs = super().pyre_mountApplicationFolders(pfs=pfs, prefix=prefix)
-        # all done
-        return pfs
 
 
  # end of file
