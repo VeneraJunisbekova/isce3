@@ -1,7 +1,7 @@
 # -*- Makefile -*-
 
 # project meta-data
-nisar.major := 3
+nisar.major := 1
 nisar.minor := 0
 
 # nisar consists of python packages
