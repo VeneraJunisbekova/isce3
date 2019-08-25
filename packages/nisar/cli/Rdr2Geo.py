@@ -9,8 +9,8 @@ import nisar
 # extend the {isce3} command by the same name
 class Rdr2Geo(isce3.cli.rdr2geo(), family="nisar.cli.rdr2geo"):
     """
-    Invoke the {rdr2geo} workflow to compute the transformation from radar coordinates to
-    geodetic coordinates for a given NISAR compliant SLC product
+    Invoke the {rdr2geo} workflow to compute the transformation from radar to geodetic
+    coordinates for a given NISAR compliant SLC product
     """
 
 

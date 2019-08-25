@@ -30,7 +30,7 @@ def config():
 
 # easy access to specific workflows
 @nisar.foundry(implements=nisar.shells.action,
-               tip="compute a transformation from geodetic to radar coordinates given an SLC")
+               tip="compute a transformation from geodetic to radar coordinates given a NISAR SLC")
 def geo2rdr():
     # load the command
     from .Geo2Rdr import Geo2Rdr
@@ -41,7 +41,7 @@ def geo2rdr():
 
 
 @nisar.foundry(implements=nisar.shells.action,
-               tip="compute a transformation from radar to geodetic coordinates given an SLC")
+               tip="compute a transformation from radar to geodetic coordinates given a NISAR SLC")
 def rdr2geo():
     # load the command
     from .Rdr2Geo import Rdr2Geo

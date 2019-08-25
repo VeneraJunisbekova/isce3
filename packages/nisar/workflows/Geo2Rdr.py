@@ -5,10 +5,10 @@ import isce3
 import nisar
 
 
-# the {rdr2geo} workflow with {nisar} specific defaults
-class Rdr2Geo(isce3.workflows.rdr2geo(), family="nisar.workflows.rdr2geo"):
+# the {geo2rdr} workflow with {nisar} specific defaults
+class Geo2Rdr(isce3.workflows.geo2rdr(), family="nisar.workflows.geo2rdr"):
     """
-    Compute the transformation from radar to geodetic coordinates for a given NISAR compliant
+    Compute the transformation from geodetic to radar coordinates for a given NISAR compliant
     SLC product
     """
 
