@@ -44,6 +44,7 @@ from . import (
     shells,              # application support
     cli,                 # command panels that client packages may extend
     protocols,           # abstract specifications of isce3 entities
+    factories,           # data processors
     workflows,           # built in workflows
 )
 
