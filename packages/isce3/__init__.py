@@ -45,6 +45,7 @@ from . import (
     cli,                 # command panels that client packages may extend
     protocols,           # abstract specifications of isce3 entities
     factories,           # data processors
+    readers,             # parsers of the standard formats for encoding isce3 products
     workflows,           # built in workflows
 )
 

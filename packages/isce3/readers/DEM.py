@@ -14,4 +14,9 @@ class DEM(Reader, family="isce3.readers.dem.dem", implements=isce3.protocols.rea
     """
 
 
+    # user configurable state
+    name = isce3.properties.path()
+    name.doc = "the path to the file with the elevation data"
+
+
 # end of file
