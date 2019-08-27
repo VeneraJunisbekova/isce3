@@ -15,7 +15,7 @@ class Rdr2Geo(isce3.flow.workflow, family="isce3.workflows.rdr2geo"):
     rdr2geo = isce3.protocols.factories.rdr2geo()
     rdr2geo.doc = "the SLC converter from radar to geodetic coordinates"
 
-    # the necessary factories
+    # sources of input
     slcReader = isce3.protocols.readers.slc()
     slcReader.doc = "the reader of native SLCs"
 
@@ -33,19 +33,9 @@ class Rdr2Geo(isce3.flow.workflow, family="isce3.workflows.rdr2geo"):
         demReader = self.demReader
         slcReader = self.slcReader
 
-        print(f"{self}:")
-        print(f"    rdr2geo: {self.rdr2geo}")
-        print(f"    demReader: {self.demReader}")
-        print(f"    slcReader: {self.slcReader}")
-
-        # all done
-        return
-        # bind the parts together to make the flow
-        # connect the geo2rdr inputs
-        rdr2geo.radarSLC = slcReader.slc
+        # bind
         rdr2geo.dem = demReader.dem
-        # and its outputs
-        slcWriter.slc = rdr2geo.geocodedSLC
+        rdr2geo.slc = slcReader.slc
 
         # all done
         return
