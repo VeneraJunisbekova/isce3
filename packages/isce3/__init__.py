@@ -43,7 +43,10 @@ from . import (
     meta,                # package meta-data
     shells,              # application support
     cli,                 # command panels that client packages may extend
+    # abstractions
     protocols,           # abstract specifications of isce3 entities
+    # concrete components
+    products,            # data
     factories,           # data processors
     readers,             # parsers of the standard formats for encoding isce3 products
     workflows,           # built in workflows
