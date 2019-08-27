@@ -2,7 +2,7 @@
 
 
 # publish
-# the base class, just in case some derived package needs to extend
+# the base class, just in case some derived package wants to extend
 from .Reader import Reader as reader
 # readers
 from .DEM import DEM as dem
