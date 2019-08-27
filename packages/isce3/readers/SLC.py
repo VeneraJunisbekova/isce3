@@ -14,4 +14,13 @@ class SLC(Reader, family="isce3.readers.slc.slc", implements=isce3.protocols.rea
     """
 
 
+    # user configurable state
+    filename = isce3.properties.path()
+    filename.doc = "the path to the SLC file"
+
+    # outputs
+    slc = isce3.protocols.products.slc.output()
+    slc.doc = "the SLC product retrieved from the file"
+
+
 # end of file
