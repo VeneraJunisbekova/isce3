@@ -13,4 +13,9 @@ class DEM(isce3.flow.product,
     """
 
 
+    # product meta-data
+    region = isce3.properties.array()
+    region.doc = "the geographic region of the elevation model"
+
+
 # end of file

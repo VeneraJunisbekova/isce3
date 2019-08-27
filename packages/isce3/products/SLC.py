@@ -12,4 +12,13 @@ class SLC(isce3.flow.product,
     The base SLC product
     """
 
+
+    # product meta-data
+    samples = isce3.properties.int()
+    samples.doc = "the number of samples in a line"
+
+    lines = isce3.properties.int()
+    lines.doc = "the number of acquisition lines"
+
+
 # end of file
