@@ -15,6 +15,10 @@ class Rdr2Geo(isce3.flow.factory,
 
 
     # inputs
+    dem = isce3.protocols.products.dem.input()
+    dem.doc = "the SLC that defines the transform"
+
+
     slc = isce3.protocols.products.slc.input()
     slc.doc = "the SLC that defines the transform"
 
