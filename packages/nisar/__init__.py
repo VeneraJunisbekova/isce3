@@ -31,6 +31,8 @@ home, prefix, defaults = package.layout()
 from . import (
     meta,        # package meta-data
     shells,      # application support
+    products,    # NISAR specific data products
+    readers,     # readers for NISAR products
     workflows,   # built-in processing workflows
 )
 
