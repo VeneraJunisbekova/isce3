@@ -14,4 +14,9 @@ class Geo2Rdr(isce3.flow.factory,
     """
 
 
+    # inputs
+    slc = isce3.protocols.products.slc.input()
+    slc.doc = "the SLC that defines the transform"
+
+
 # end of file
