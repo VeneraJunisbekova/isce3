@@ -15,6 +15,7 @@ class Geo2Rdr(isce3.workflows.geo2rdr(), family="nisar.workflows.geo2rdr"):
 
     # override the SLC reader to install the {nisar} specific defaults
     slcReader = nisar.protocols.readers.slc()
+    slcReader.default = nisar.readers.slc()
     slcReader.doc = "the reader of NISAR compliant SLC products"
 
 
