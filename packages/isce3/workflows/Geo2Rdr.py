@@ -34,8 +34,8 @@ class Geo2Rdr(isce3.flow.workflow, family="isce3.workflows.geo2rdr"):
         slcReader = self.slcReader
 
         # bind
-        ge2rdr.dem = self.demReader.dem
-        ge2rdr.slc = self.slcReader.slc
+        geo2rdr.dem = self.demReader.dem
+        geo2rdr.slc = self.slcReader.slc
 
         # all done
         return
