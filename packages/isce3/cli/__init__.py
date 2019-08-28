@@ -9,10 +9,11 @@ import isce3
 # info about the app
 @isce3.foundry(implements=isce3.shells.action, tip="display information about this app")
 def about():
+    """
+    Display human readable information about the app
+    """
     # load the command
     from .About import About
-    # steal its docstring
-    __doc__ = About.__doc__
     # and publish it
     return About
 
@@ -20,10 +21,11 @@ def about():
 # information about the layout of the isce3 package
 @isce3.foundry(implements=isce3.shells.action, tip="information about the layout of {isce3}")
 def config():
+    """
+    Display configuration information about the {isce3} package
+    """
     # load the command
     from .Config import Config
-    # steal its docstring
-    __doc__ = Config.__doc__
     # and publish it
     return Config
 
@@ -32,10 +34,12 @@ def config():
 @isce3.foundry(implements=isce3.shells.action,
                tip="compute a transformation from geodetic to radar coordinates for a given SLC")
 def geo2rdr():
+    """
+    Invoke the {geo2rd} workflow to compute the transformation from geodetic coordinates to
+    radar coordinates for a given SLC
+    """
     # load the command
     from .Geo2Rdr import Geo2Rdr
-    # steal its docstring
-    __doc__ = Geo2Rdr.__doc__
     # and publish it
     return Geo2Rdr
 
@@ -43,12 +47,26 @@ def geo2rdr():
 @isce3.foundry(implements=isce3.shells.action,
                tip="compute a transformation from radar to geodetic coordinates for a given SLC")
 def rdr2geo():
+    """
+    Invoke the {rdr2geo} workflow to compute the transformation from radar coordinates to
+    geodetic coordinates for a given SLC
+    """
     # load the command
     from .Rdr2Geo import Rdr2Geo
-    # steal its docstring
-    __doc__ = Rdr2Geo.__doc__
     # and publish it
     return Rdr2Geo
+
+
+# support
+@isce3.foundry(implements=isce3.shells.action)
+def complete():
+    """
+    Support for auto-completion
+    """
+    # load the command
+    from .Complete import Complete
+    # and publish it
+    return Complete
 
 
 # end of file
