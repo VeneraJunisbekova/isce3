@@ -53,11 +53,11 @@ def main(opts):
     # Prepare input rasters
     inSlcDataset = productSlc.getGdalSlcDataset(opts.frequency, opts.polarization)
     inSlcRaster = Raster('', dataset=inSlcDataset)
-    azOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'range.off'))
-    rgOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'azimuth.off'))
+    azOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'azimuth.off'))
+    rgOffsetRaster = Raster(filename=os.path.join(opts.offsetdir, 'range.off'))
 
     # Init output directory
-    if not os.path.isdir(opts.outdir):
+    if opts.outdir and not os.path.isdir(opts.outdir):
         os.mkdir(opts.outdir)
 
     # Prepare output raster
