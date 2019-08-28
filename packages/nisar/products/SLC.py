@@ -3,12 +3,13 @@
 
 # support
 import isce3
+import nisar
 
 
-# the base class for SLC products
-class SLC(isce3.products.slc(), family="nisar.products.slc"):
+# the NISAR SLC data product extends the one from isce3
+class SLC(isce3.products.slc(), family="nisar.products.slc.slc"):
     """
-    The base SLC product
+    The NISAR SLC data product
     """
 
 
