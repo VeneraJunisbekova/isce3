@@ -14,10 +14,10 @@ from isce3 import (
     nexus,
     # access to the low level workflow building blocks
     flow,
+    # miscellaneous
+    tracking, units, weaver, primitives,
     # abstractions
     protocols,
-    # miscellaneous
-    tracking, units, weaver,
     )
 
 
