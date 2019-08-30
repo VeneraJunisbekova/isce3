@@ -23,7 +23,7 @@ from pyre import (
     # workflows
     flow,
     # miscellaneous
-    tracking, units, weaver,
+    tracking, units, weaver, primitives,
     )
 
 
