@@ -20,4 +20,21 @@ class SLC(HDF5, family='nisar.readers.slc.slc', implements=nisar.protocols.reade
     slc.doc = "the SLC product extracted by this reader"
 
 
+    # implementation details
+    # the file layout
+    # the root of SLC information
+    SLC = HDF5.LSAR / "SLC"
+
+    # meta-data
+    METADATA = SLC / "metadata"
+    ATTITUDE = METADATA / "attitude"
+    CALIBRATION = METADATA / "calibrationInformation"
+    GEOLOCATION = METADATA / "geolocationGrid"
+    ORBIT = METADATA / "orbit"
+    PROCESSING = METADATA / "processingInformation"
+
+    # payload
+    SWATHS = SLC / "swaths"
+
+
 # end of file
