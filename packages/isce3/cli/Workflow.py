@@ -17,8 +17,8 @@ class Workflow(isce3.shells.command, family="isce3.cli.workflow"):
     flow.doc = "the workflow to execute"
 
 
-    # create a new geo2rdr flow
-    @isce3.export(tip="create a new instance of a the workflow")
+    # create a new generic flow; subclasses can specialize by providing a default value for the flow trait
+    @isce3.export(tip="create a new instance of the workflow")
     def new(self, plexus, **kwds):
         """
         Persist the current flow in a configuration file
@@ -29,6 +29,22 @@ class Workflow(isce3.shells.command, family="isce3.cli.workflow"):
         channel.log(f"saving '{self.flow.pyre_name}'")
         # do it
         self.flow.pyre_save()
+        # all done
+        return 0
+
+
+    # execute the flow
+    @isce3.export(tip="execute the flow")
+    def make(self, plexus, **kwds):
+        """
+        Execute the current workflow
+        """
+        # grab a channel
+        channel = plexus.info
+        # show me
+        channel.log(f"executing '{self.flow.pyre_name}'")
+        # do it
+        self.flow.pyre_make()
         # all done
         return 0
 
