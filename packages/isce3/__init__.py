@@ -45,6 +45,8 @@ from . import (
     cli,                 # command panels that client packages may extend
     # abstractions
     protocols,           # abstract specifications of isce3 entities
+    # support
+    core,                # access to low level core objects from libisce3
     # concrete components
     products,            # data
     factories,           # data processors
@@ -52,10 +54,9 @@ from . import (
     workflows,           # built in workflows
 )
 
-# convenience access to factories of objects from the lower level namespaces
-from .core import (
-    newEllipsoid,           # ellipsoid factory
-)
+
+# singletons
+wgs84 = core.newEllipsoid(name="wgs84")
 
 
 # administrative
