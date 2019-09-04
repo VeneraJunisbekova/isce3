@@ -5,7 +5,8 @@
 import isce3
 
 
-# factories for core components
+# factories for core components; if you are looking to create instances of {isce3} core
+# objects, this is probably what you are looking for
 def newEllipsoid(**kwds):
     """
     Create a new ellipsoid
@@ -16,7 +17,7 @@ def newEllipsoid(**kwds):
     return Ellipsoid(**kwds)
 
 
-# foundries for core components
+# foundries for core components; they help resolve user friendly words into component instances
 @isce3.foundry(implements=isce3.protocols.core.ellipsoid,
                tip="the reference implementation of an ellipsoidal gravitational model")
 def ellipsoid():
