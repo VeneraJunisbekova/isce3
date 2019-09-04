@@ -29,6 +29,8 @@ def cmdLineParse():
             help='Output directory. Default: offsets.')
     parser.add_argument('offsetdir', type=str, action='store', default='offsets',
             help='Input offset directory. Default: offsets.')
+    parser.add_argument('linesPerTile', type=int, action='store', default=0,
+            help='Number of lines resampled per iteration. Default: 0')
 
     # Parse and return
     return parser.parse_args()
@@ -50,6 +52,10 @@ def main(opts):
             productSlc.getDopplerCentroid(),
             productGrid.wavelength)
     
+    # set number of lines per tile if arg > 0
+    if opts.linesPerTile:
+        resamp.linesPerTile = opts.linesPerTile
+
     # Prepare input rasters
     inSlcDataset = productSlc.getGdalSlcDataset(opts.frequency, opts.polarization)
     inSlcRaster = Raster('', dataset=inSlcDataset)
@@ -62,7 +68,7 @@ def main(opts):
 
     # Prepare output raster
     driver = gdal.GetDriverByName('ISCE')
-    slcName = 'coreg_{}.slc'.format(opts.polarization)
+    slcName = 'resamp_{}_{}.slc'.format(opts.frequency, opts.polarization)
     outds = driver.Create(os.path.join(opts.outdir, slcName), rgOffsetRaster.width,
                           rgOffsetRaster.length, 1, gdal.GDT_CFloat32)
     outSlcRaster = Raster('', dataset=outds)
