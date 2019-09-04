@@ -22,5 +22,8 @@ class Geo2Rdr(isce3.flow.factory,
     slc = isce3.protocols.products.slc.input()
     slc.doc = "the SLC that defines the transform"
 
+    ellipsoid = isce3.protocols.core.ellipsoid.input()
+    ellipsoid.doc = "the reference ellipsoid"
+
 
 # end of file

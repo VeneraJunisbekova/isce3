@@ -18,9 +18,11 @@ class Rdr2Geo(isce3.flow.factory,
     dem = isce3.protocols.products.dem.input()
     dem.doc = "the SLC that defines the transform"
 
-
     slc = isce3.protocols.products.slc.input()
     slc.doc = "the SLC that defines the transform"
+
+    ellipsoid = isce3.protocols.core.ellipsoid.input()
+    ellipsoid.doc = "the reference ellipsoid"
 
 
 # end of file
